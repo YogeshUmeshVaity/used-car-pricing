@@ -8,13 +8,17 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 
+/**
+ * Just makes sure that the object that we pass to the constructor is of some class. Some what
+ * better solution that passing 'any' to our Serialize decorator.
+ */
 interface ClassConstructor {
   new (...args: any[]): {};
 }
 
 /**
  * Wraps up the SerializeInterceptor in a decorator. So we don't have to write a big line of code
- * at the use-site.
+ * at the use-site. This class can be re-used for any DTO.
  * @param dto to serialize.
  * @returns the SerializeInterceptor.
  */
