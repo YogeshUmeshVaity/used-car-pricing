@@ -12,15 +12,24 @@ interface ClassConstructor {
   new (...args: any[]): {};
 }
 
+/**
+ * Wraps up the SerializeInterceptor in a decorator. So we don't have to write a big line of code
+ * at the use-site.
+ * @param dto to serialize.
+ * @returns the SerializeInterceptor.
+ */
 export function Serialize(dto: ClassConstructor) {
   return UseInterceptors(new SerializeInterceptor(dto));
 }
 
+/**
+ * Excludes the properties from the response data according to a specified DTO.
+ */
 export class SerializeInterceptor implements NestInterceptor {
   constructor(private dto: any) {}
   // The data variable here is the default object the Nest sends. e.g. User entity object.
   // We convert that to our dto type.
-  // The map function maps the default Observable to our desired Observable.
+  // The map operator for RxJS maps the default Observable to our desired Observable.
   intercept(context: ExecutionContext, handler: CallHandler): Observable<any> {
     // The pipe() function take observables as a input and it returns another observable. 
     // The previous observable stays unmodified.
