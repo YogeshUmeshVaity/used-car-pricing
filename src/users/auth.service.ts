@@ -45,6 +45,8 @@ export class AuthService {
 
     const [salt, storedHash] = user.password.split('.');
 
+    // There is no verify function in Scrypt, instead, we generate hash of the given password and
+    // compare manually.
     const hash = (await scrypt(password, salt, 32)) as Buffer;
 
     if (storedHash !== hash.toString('hex')) {
