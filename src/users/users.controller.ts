@@ -31,6 +31,10 @@ export class UsersController {
     private authService: AuthService,
   ) {}
 
+  // Instead of custom decorator, we could directly access the request object here in the controller
+  // like whoAmI(@Request request: Request). But then we would have to extract the user from
+  // the request in every handler like user = request.currentUser. Custom decorator helps keep the
+  // code cleaner and more concise.
   @Get('/whoami')
   @UseGuards(AuthGuard)
   whoAmI(@CurrentUser() user: User) {
