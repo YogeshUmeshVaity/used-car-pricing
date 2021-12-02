@@ -3,6 +3,8 @@ import { AuthService } from './auth.service';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 
+// Partial helps us in type safety. e.g. if we write Promise.resolve(123) in the find function below,
+// TypeScript will give error saying we need to pass a User[] instead of a number.
 describe('AuthService', () => {
   let service: AuthService;
   let fakeUsersService: Partial<UsersService>;
@@ -26,16 +28,21 @@ describe('AuthService', () => {
       },
     };
 
+    // Temporary testing DI container which contains the list of classes and their dependencies.
     const module = await Test.createTestingModule({
+      // List of things we want to register in our 'testing' DI container.
       providers: [
         AuthService,
         {
           provide: UsersService,
+          // If anyone asks for UsersService, give them this object.
           useValue: fakeUsersService,
         },
       ],
     }).compile();
 
+    // Makes the DI container to create a instance of the AuthService with all of its different
+    // dependencies already initialized using the components specified in module creation above.
     service = module.get(AuthService);
   });
 

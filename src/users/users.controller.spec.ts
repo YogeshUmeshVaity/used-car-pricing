@@ -31,7 +31,6 @@ describe('UsersController', () => {
       },
     };
 
-    // Temporary testing DI container
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [
