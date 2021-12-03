@@ -59,6 +59,7 @@ describe('AuthService', () => {
     expect(hash).toBeDefined();
   });
 
+  // In this case, when the error occurs, we call done(), that means test completed successfully.
   it('throws an error if user signs up with email that is in use', async (done) => {
     await service.signup('asdf@asdf.com', 'asdf');
     try {
