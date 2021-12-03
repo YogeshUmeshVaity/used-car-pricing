@@ -50,9 +50,15 @@ describe('AuthService', () => {
     expect(service).toBeDefined();
   });
 
+  /**
+   * The AuthService#signup() hashes the password and gives it to the UsersService#create().
+   * We are testing whether the AuthService#signup() correctly hashes the password.
+   * We don't know what the hashed password is because the salt is generated randomly inside the 
+   * signup(). So, we are just making sure the plain text password and hashed password not equal.
+   */
   it('creates a new user with a salted and hashed password', async () => {
     const user = await service.signup('asdf@asdf.com', 'asdf');
-
+    
     expect(user.password).not.toEqual('asdf');
     const [salt, hash] = user.password.split('.');
     expect(salt).toBeDefined();
