@@ -11,6 +11,8 @@ describe('UsersController', () => {
 
   beforeEach(async () => {
     fakeUsersService = {
+      // The arguments passed should be used inside the return values. e.g. the way we are using
+      // the id here instead of writing some random id in the return value.
       findOne: (id: number) => {
         return Promise.resolve({
           id,
