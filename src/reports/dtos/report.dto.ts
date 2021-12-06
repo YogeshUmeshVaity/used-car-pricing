@@ -21,6 +21,9 @@ export class ReportDto {
   @Expose()
   approved: boolean;
 
+  // obj is a reference to the original report entity
+  // so, we pull out the property that we need from this object
+  // now the value of obj.user.id will be assigned to our userId field.
   @Transform(({ obj }) => obj.user.id)
   @Expose()
   userId: number;
