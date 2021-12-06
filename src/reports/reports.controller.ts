@@ -30,7 +30,7 @@ export class ReportsController {
 
   @Post()
   @UseGuards(AuthGuard)
-  @Serialize(ReportDto) // Limit the info in the outgoing response.
+  @Serialize(ReportDto)  // Limits the outgoing info in the response
   createReport(@Body() body: CreateReportDto, @CurrentUser() user: User) {
     return this.reportsService.create(body, user);
   }

@@ -28,6 +28,8 @@ export function Serialize(dto: ClassConstructor) {
 
 /**
  * Excludes the properties from the response data according to a specified DTO.
+ * This interceptor applies to the outgoing response and not to the incoming request because
+ * we have defined our logic inside the handler object.
  */
 export class SerializeInterceptor implements NestInterceptor {
   constructor(private dto: any) {}
