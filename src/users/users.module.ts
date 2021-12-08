@@ -12,6 +12,8 @@ import { CurrentUserMiddleware } from './middlewares/current-user.middleware';
   providers: [UsersService, AuthService],
 })
 export class UsersModule {
+  // although the middleware is called inside the UsersModule instead of AppModule, it is going to
+  // run for all the routes in our app.
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(CurrentUserMiddleware).forRoutes('*');
   }
