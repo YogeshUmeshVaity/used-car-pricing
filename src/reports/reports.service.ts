@@ -14,8 +14,8 @@ export class ReportsService {
     return this.repo
       .createQueryBuilder()
       .select('AVG(price)', 'price')
-      .where('make = :make', { make })
-      .andWhere('model = :model', { model })
+      .where('make = :make', { make }) // This syntax helps prevent SQL injection.
+      .andWhere('model = :model', { model }) // Using 'where' again overrides the previous 'where', so we use 'andWhere'.
       .andWhere('lng - :lng BETWEEN -5 AND 5', { lng })
       .andWhere('lat - :lat BETWEEN -5 AND 5', { lat })
       .andWhere('year - :year BETWEEN -3 AND 3', { year })
